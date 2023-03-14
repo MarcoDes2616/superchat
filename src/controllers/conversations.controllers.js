@@ -86,6 +86,7 @@ const createConversationGroup = async (req, res) => {
             "type_id": 2
         }
         const result = await ConversationsServices.create(data)
+        
         if (!result) {
             res.status(500).json()
         }

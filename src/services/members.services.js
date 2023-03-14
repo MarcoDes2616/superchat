@@ -1,5 +1,7 @@
 const Members = require("../models/members.models");
 const UserState = require("../models/userState.models");
+const Conversations = require("../models/conversations.models")
+const Type = require("../models/type.models")
 
 class MembersServices {
     static async create(dataCreator, dataGuest) {
@@ -18,12 +20,21 @@ class MembersServices {
             const results = await Members.findAll({
                 where: {"user_id": id},
                 attributes: {
-                    exclude: ["state_id", "user_id"]
+                    exclude: ["state_id", "user_id", "id"]
                 },
-                include: {
+                include: [{
                     model: UserState,
                     attributes: ["name"]
+                },
+                {
+                    model: Conversations,
+                    attributes: { exclude: ["id", "updatedAt"]},
+                    include: {
+                        model: Type,
+                        attributes: ["name"]
+                    }
                 }
+            ]
             })
             return results
         } catch (error) {

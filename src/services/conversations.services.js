@@ -28,7 +28,11 @@ class ConversationsServices {
                 },
                 {
                     model: Messages,
-                    attributes: ["message", "user_id"]
+                    attributes: ["message", "user_id"],
+                    include: {
+                        model: Users,
+                        attributes: ["username"]
+                    }
                 }]
 
             })
