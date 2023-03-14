@@ -14,9 +14,9 @@ const createConversationSingle = async (req, res, next) => {
             "type_id": 1
         }
         const result = await ConversationsServices.create(data)
-
+        const { id } = result
         if (result) {
-            const { id } = result
+            
             const [dataCreator, dataGuest] = [
                 {
                     "conversation_id": id,
@@ -34,7 +34,7 @@ const createConversationSingle = async (req, res, next) => {
             res.status(500).json(error)
         }
 
-        res.status(201).json();
+        res.status(201).json({NewConversation_Id: id});
     } catch (error) {
         next(error)
     }
@@ -108,7 +108,7 @@ const createConversationGroup = async (req, res, next) => {
         });
 
 
-        res.status(201).json(result)
+        res.status(201).json(result.id)
     } catch (error) {
         next(error)
     }

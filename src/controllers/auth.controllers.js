@@ -1,5 +1,6 @@
 const UserServices = require("../services/user.services");
 const bcrypt = require("bcrypt");
+const AuthServices = require("../services/auth.services");
 
 const userLogin = async (req, res, next) => {
   try {
@@ -21,12 +22,14 @@ const userLogin = async (req, res, next) => {
       });
     }
     const { id, name, lastname, username } = user;
+    const token = AuthServices.genToken({ id, name, lastname, username });
     res.json({
       id,
       name,
       lastname,
       username,
       email,
+      token
     });
   } catch (error) {
     next(error);
