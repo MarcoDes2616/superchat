@@ -10,7 +10,7 @@ const authenticate = (req, res, next) => {
     });
   }
   try {
-    const decoded = jwt.verify(token, "iannacus", { algorithms: "HS512" });
+    const decoded = jwt.verify(token, "superchat", { algorithms: "HS512" });
     // * enviamos la información al siguiente middleware
     req.user = decoded;
     next();
