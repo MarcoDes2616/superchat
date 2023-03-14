@@ -8,7 +8,7 @@ const validateResult = (req, res, next) => {
     next({
       status: 400,
       name: "Validation error",
-      message: error.array().map((error) => error.msg), // * devuelve un arreglo
+      message: error.array().map((error) => error.msg)
     });
   }
 };

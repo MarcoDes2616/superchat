@@ -14,7 +14,7 @@ const errorHandlerRouter = (app) => {
   app.use("*", (req, res) => {
     return res
       .status(404)
-      .send("El backend se ha olvidado de esta ruta o quizas nunca la haga");
+      .send("Page not found");
   });
 };
 
