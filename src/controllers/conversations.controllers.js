@@ -2,7 +2,7 @@ const ConversationsServices = require("../services/conversations.services");
 const MembersServices = require("../services/members.services");
 
 
-const createConversationSingle = async (req, res) => {
+const createConversationSingle = async (req, res, next) => {
     try {
         const { title, user_creator, user_guest } = req.body  // title, creator, guest,
         if (user_creator === user_guest) {
@@ -36,42 +36,42 @@ const createConversationSingle = async (req, res) => {
 
         res.status(201).json();
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 }
 
-const getConversationByUserId = async (req, res) => {
+const getConversationByUserId = async (req, res, next) => {
     const { id } = req.params;
 
     try {
         const results = await MembersServices.getById(id);
         res.json(results);
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 }
 
-const getConversationData = async (req, res) => {
+const getConversationData = async (req, res, next) => {
     const { id } = req.params;
     try {
         const results = await ConversationsServices.getData(id)
         res.json(results)
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 }
 
-const deleteConversation = async (req, res) => {
+const deleteConversation = async (req, res, next) => {
     const { id } = req.params;
     try {
         await ConversationsServices.delete(id)
         res.status(201).json()
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 }
 
-const createConversationGroup = async (req, res) => {
+const createConversationGroup = async (req, res, next) => {
     const { iduser } = req.params;
     const { participants, title } = req.body;
     let opTitle
@@ -110,7 +110,7 @@ const createConversationGroup = async (req, res) => {
 
         res.status(201).json(result)
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 }
 

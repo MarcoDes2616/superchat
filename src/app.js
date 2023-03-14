@@ -7,6 +7,7 @@ const userRoutes = require("./routes/user.routes");
 const authRoutes = require("./routes/auth.routes");
 const conversationRoutes = require("./routes/conversations.routes");
 const messagesRoutes = require("./routes/messages.routes");
+const errorHandlerRouter = require("./routes/errorHandler.routes");
 
 
 const PORT = 8000;
@@ -16,7 +17,7 @@ initModels();
 // instancia de mi aplicacion
 const app = express(); 
 
-// esto se ejecuta por cada peticion que se hace al servidor
+
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
@@ -41,7 +42,7 @@ app.get("/", (req, res) => {
   res.send("welcome to my API superchat");
 });
 
-// errorHandlerRouter(app);
+errorHandlerRouter(app);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);

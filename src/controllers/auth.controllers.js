@@ -29,8 +29,7 @@ const userLogin = async (req, res, next) => {
       email,
     });
   } catch (error) {
-    // next(error);
-    res.status(400).json(error)
+    next(error);
   }
 };
 
